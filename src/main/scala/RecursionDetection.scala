@@ -24,6 +24,7 @@ object RecursionDetection {
   case class IndexAndTimes(idx: Int, times: Int)
 
   def indexMap[A](xs: CompactList[A]): Map[A, List[IndexAndTimes]] =
+    // The indexes are needed so the list can be rebuilt from produced the Map
     xs.zipWithIndex
       .groupBy(_._1.a)
       .mapValues(_.map(x => IndexAndTimes(x._2, x._1.times)))

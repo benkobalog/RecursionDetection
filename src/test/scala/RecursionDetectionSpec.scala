@@ -12,9 +12,9 @@ class RecursionDetectionSpec extends FlatSpec with Matchers {
 
     assert(
       compactRepeats(intList) == List(RepeatableElement(1, 1),
-        RepeatableElement(2, 3),
-        RepeatableElement(3, 2),
-        RepeatableElement(2, 2)))
+                                      RepeatableElement(2, 3),
+                                      RepeatableElement(3, 2),
+                                      RepeatableElement(2, 2)))
   }
 
   it should "work with Char type" in {
@@ -22,8 +22,8 @@ class RecursionDetectionSpec extends FlatSpec with Matchers {
 
     assert(
       compactRepeats(charList) == List(RepeatableElement('a', 4),
-        RepeatableElement('b', 1),
-        RepeatableElement('c', 6)))
+                                       RepeatableElement('b', 1),
+                                       RepeatableElement('c', 6)))
   }
 
   it should "work with a class with an equals function" in {
@@ -31,7 +31,7 @@ class RecursionDetectionSpec extends FlatSpec with Matchers {
       override def equals(o: Any): Boolean = {
         o match {
           case x: A => x.a == a
-          case _ => false
+          case _    => false
         }
       }
     }
@@ -40,7 +40,7 @@ class RecursionDetectionSpec extends FlatSpec with Matchers {
 
     assert(
       compactRepeats(list) == List(RepeatableElement(new A(1), 3),
-        RepeatableElement(new A(2), 2)))
+                                   RepeatableElement(new A(2), 2)))
   }
 
   it should "not have repetition in lists without repetition" in {
@@ -52,7 +52,6 @@ class RecursionDetectionSpec extends FlatSpec with Matchers {
   "indexMap and listFromIndexMap" should "return the original list" in {
     val charList = "aaaabcccccc".toList
     val intList = List(1, 2, 2, 2, 3, 3, 2, 2)
-
 
     assert(charList == listFromIndexMap(indexMap(compactRepeats(charList))))
     assert(intList == listFromIndexMap(indexMap(compactRepeats(intList))))
